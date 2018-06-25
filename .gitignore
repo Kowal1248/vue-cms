@@ -38,9 +38,9 @@ bower_components
 build/Release
 
 # Dependency directories
-./cms/node_modules/
-./cms-server/node_modules/
-./cms-server/.db
+cms/node_modules/
+cms-server/node_modules/
+cms-server/.db
 jspm_packages/
 
 # TypeScript v1 declaration files
