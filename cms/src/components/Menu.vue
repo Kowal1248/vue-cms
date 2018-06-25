@@ -15,12 +15,19 @@
     <div class="row">
       <div class="col-md-4">
         <div class="box">
-          <h6 class="box-title">Zbuduj menu
+          <h6 class="box-title">Menu
+            <span class="ti-check" style="float:right" v-on:click="save"></span>
         </h6>
           <hr>
-          <draggable v-model="pages2"  class="dragArea" :options="{group:'people'}" v-on:change="view">
-            <div v-for="item in pages2" :key="item.website.title" class="panel" >
-              Tytuł: {{item.website.title}}
+          <draggable v-model="menu" class="dragArea" :options="{group:'people'}">
+            <div v-for="item in menu" :key="item.name" class="panel" style="margin-bottom:10px" >
+              <span class="ti-trash" style="float:right" v-on:click="trash(item.idPage)"></span>
+
+              <p>Nazwa: <input type="text" name="" v-model="item.name"></p>
+              <p>Url: {{$root.$options.settings.url}}/{{item.website.href}}</p>
+            </div>
+            <div v-if="menu.length == 0">
+              Tutaj przeciągnij
             </div>
           </draggable>
         </div>
@@ -31,8 +38,11 @@
           <h6 class="box-title">Wybierz stronę
       </h6>
           <hr>
-          <draggable v-model="pages"   class="dragArea" :options="{group:'people'}">
-            <div v-for="item in pages" :key="item.website.title" class="panel">{{item.website.title}}
+          <draggable v-model="pages" class="dragArea" :options="{group:'people'}">
+            <div v-for="item in pages" :key="item.website.title" class="panel" v-if="check(item._id)">{{item.website.title}}
+            </div>
+            <div v-if="pages.length == 0">
+              Tutaj przeciągnij
             </div>
           </draggable>
         </div>
@@ -45,37 +55,94 @@
 </template>
 <script>
 import pages from '../http/pages'
+import menu from '../http/menu'
+
 import draggable from 'vuedraggable'
 
 export default {
   components: {
-            draggable,
-        },
+    draggable,
+  },
   data() {
     return {
       pages: [],
-      pages2: []
+      menu: []
     }
   },
   methods: {
-    get: function() {
+    getPages: function() {
       var vm = this
       pages.get()
         .then(function(res) {
           vm.pages = res.data
-          vm.pages2 = res.data
         })
         .catch(function(res) {
           vm.pages = res.data
         })
     },
-    view:function(){
-      console.log(this.pages2);
+    getMenu: function() {
+      var vm = this
+      menu.get()
+        .then(function(res) {
+          if (res.data.length != 0) {
+            vm.menu = res.data
+          }
+        })
+        .catch(function(res) {
+
+        })
+    },
+    view: function() {
+      console.log(this.menu);
+    },
+    save: function() {
+      var v = this
+
+      for (var i = 0; i < v.menu.length; i++) {
+        console.log('id: ',v.menu[i]._id);
+        menu.save({name: v.menu[i].name, idPage: v.menu[i]._id, website: v.menu[i].website, index: i})
+          .then(function(res) {
+            v.getMenu()
+          })
+          .catch(function(res) {
+            console.log(res);
+          })
+      }
+    },
+    trash: function(id) {
+      var vm = this
+      for (var i = 0; i < this.menu.length; i++) {
+        if (this.menu[i].idPage == id) {
+          var id = vm.menu[i]._id
+          this.menu.splice(this.menu.indexOf(menu[i]), 1);
+        }
+      }
+
+      menu.delete(id)
+        .then(function(res) {
+          console.log(res);
+
+        })
+        .catch(function(res) {
+          console.log(res);
+        })
+
+    },
+    check: function(id){
+      console.log(id);
+      var menu = this.menu
+      var view = true
+      for (var i = 0; i < menu.length; i++) {
+        if(menu[i]._id == id)
+          view = false
+      }
+      return view
     }
 
   },
   beforeMount() {
-    this.get()
+    this.getMenu()
+    this.getPages()
   }
 }
 </script>
@@ -83,6 +150,6 @@ export default {
 .panel {
   border: 1px solid #eee;
   border-radius: 0px;
-  padding:10px;
+  padding: 10px;
 }
 </style>

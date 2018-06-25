@@ -55,7 +55,7 @@
         </div>
         <div class="col-md-6">
           <h3 style="color: #1a0dab;font-size:18px;font-family: arial,sans-serif;margin-bottom:2px;">{{page.seo.metaTitle}}</h3>
-          <a style="color: #006621;font-size:14px;font-family: arial,sans-serif;">{{page.website.href}}</a>
+          <a style="color: #006621;font-size:14px;font-family: arial,sans-serif;">{{this.$root.$options.settings.url}}/{{page.website.href}}</a>
           <div style="padding-top:5px;color:#545454; font-size:small;font-family:arial,sans-serif;">
             {{page.seo.metaDescription}}
           </div>
@@ -88,6 +88,7 @@ export default {
   methods: {
     save: function(data) {
       var vm = this
+      data.website.href = data.website.title
       pages.save(data)
       .then(function(res){
         vm.$swal('success')

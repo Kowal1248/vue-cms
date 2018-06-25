@@ -6,6 +6,7 @@ module.exports = function(app) {
   var mes = require("./controllers/settings-controller")
   var pages = require("./controllers/pages-controller")
   var users = require("./controllers/users-controller")
+  var menu = require("./controllers/menu-controller")
 
   var upload = require('./controllers/upload-controller');
   var multiparty = require('connect-multiparty')();
@@ -17,9 +18,9 @@ module.exports = function(app) {
     .get(function(req, res) {
       res.sendFile(path.join(__dirname, '../cms/dist/', 'index.html'));
     })
-    app.route('/session')
-      .get(users.information_User)
-      .post(users.generate_session)
+  app.route('/session')
+    .get(users.information_User)
+    .post(users.generate_session)
 
   app.route('/users')
     .get(users.get_Users)
@@ -34,8 +35,8 @@ module.exports = function(app) {
     .get(mes.get_settings)
     .post(mes.save_settings)
 
-    app.route('/settings/:id')
-      .put(mes.update_settings)
+  app.route('/settings/:id')
+    .put(mes.update_settings)
 
 
   app.route('/pages')
@@ -46,6 +47,15 @@ module.exports = function(app) {
     .get(pages.read_pages)
     .put(pages.update_pages)
     .delete(pages.delete_pages)
+
+  app.route('/menu')
+    .get(menu.get_menu)
+    .post(menu.save_menu)
+
+  app.route('/menu/:id')
+    .get(menu.read_menu)
+    .put(menu.update_menu)
+    .delete(menu.delete_menu)
 
   app.route('/uploads')
     .post(multiparty, upload.upload_file);

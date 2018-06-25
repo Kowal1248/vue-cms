@@ -7,6 +7,7 @@ var express = require('express'),
   Task1 = require('./models/pages-model')
   Task2 = require('./models/upload-model')
   Task3 = require('./models/users-model')
+  Task4 = require('./models/menu-model')
 
   path = require("path"),
 
@@ -20,6 +21,7 @@ var multer = require('multer')
 const cors = require('cors');
 
 app.use(cors())
+app.use(require('./auth'))
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/cms');

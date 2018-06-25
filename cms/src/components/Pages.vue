@@ -35,7 +35,7 @@
             <tbody v-for="(item, index) in pages">
               <tr>
                 <td>{{index +1 }}</td>
-                <td></td>
+                <td>{{item.author.firstName}} {{item.author.lastName}}</td>
                 <td>{{item.website.title}}</td>
                 <td>24.01.2018 14:33</td>
                 <td>

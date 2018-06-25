@@ -1,11 +1,12 @@
 import axios from 'axios'
+import config from '../config.json'
 
 export default {
   get() {
-    return axios.get('http://10.0.17.8:8000/settings')
+    return axios.get(config.server + '/settings')
   },
   save(data) {
-    return axios.put('http://10.0.17.8:8000/settings/' + data._id,data)
+    return axios.put(config.server + '/settings/' + data._id,data)
   }
 
 }

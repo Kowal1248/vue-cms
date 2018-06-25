@@ -1,25 +1,25 @@
 import axios from 'axios'
+import config from '../config.json'
 
 export default {
   get(data) {
-    console.log(data);
     if(data == undefined)
-      return axios.get('http://10.0.17.8:8000/pages')
+      return axios.get(config.server + '/pages')
     else {
 
-      return axios.get('http://10.0.17.8:8000/pages/'+data)
+      return axios.get(config.server + '/pages/'+data)
     }
   },
 
   save(data){
-    return axios.post('http://10.0.17.8:8000/pages',data)
+    return axios.post(config.server + '/pages',data)
   },
 
   put(data){
-    return axios.put('http://10.0.17.8:8000/pages/' + data._id, data)
+    return axios.put(config.server + '/pages/' + data._id, data)
   },
 
   delete(data){
-    return axios.delete('http://10.0.17.8:8000/pages/' + data)
+    return axios.delete(config.server + '/pages/' + data)
   }
 }

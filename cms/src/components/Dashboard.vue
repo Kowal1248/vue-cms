@@ -7,11 +7,44 @@
 
     <div class="row">
       <draggable>
-        <div class="col-md-3" v-model="pages" v-for="item in pages" style="float:left;">
+        <div class="col-md-3" style="float:left;">
           <div class="box">
-            <h6 class="box-title">{{item.website.title}}
+            <h6 class="box-title">
+              Ilość stron
             </h6>
             <hr>
+
+            <h3> <span class="ti-bar-chart-alt" style="padding-right:20px;color: rgb(33, 150, 243);"></span>2455</h3>
+
+          </div>
+        </div>
+        <div class="col-md-3" style="float:left;">
+          <div class="box">
+            <h6 class="box-title">
+              Ilość załączników
+            </h6>
+            <hr>
+            <h3> <span class="ti-bar-chart-alt" style="padding-right:20px;color: rgb(255, 87, 34)"></span>2455</h3>
+
+
+          </div>
+        </div>
+        <div class="col-md-3" style="float:left;">
+          <div class="box">
+            <h6 class="box-title">
+              Ilość użytkowników
+            </h6>
+            <hr>
+            <h3> <span class="ti-bar-chart-alt" style="padding-right:20px;color: rgb(103, 58, 183);"></span>2455</h3>
+          </div>
+        </div>
+        <div class="col-md-3" style="float:left;">
+          <div class="box">
+            <h6 class="box-title">
+              Ilość wejść
+            </h6>
+            <hr>
+            <h3> <span class="ti-bar-chart-alt" style="padding-right:20px;color: rgb(233, 30, 99);"></span>2455</h3>
 
 
           </div>
@@ -24,19 +57,30 @@
       <draggable>
         <div class="col-md-8" style="float:left;">
           <div class="box">
-            <h6 class="box-title">Statystyka</h6>
-<hr>
+            <h6 class="box-title">Statystyka wejść</h6>
+            <hr>
+            <canvas id="planet-chart"></canvas>
 
           </div>
         </div>
         <div class="col-md-4" style="float:left;">
           <div class="box">
-            <h6 class="box-title">Wejścia</h6>
+            <h6 class="box-title">Lista logowań</h6>
 
             <hr>
           </div>
         </div>
       </draggable>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12" style="float:left;">
+        <div class="box">
+          <h6 class="box-title">Wyślij e-mail'a do zarejestrowanych osób:</h6>
+          <hr>
+
+        </div>
+          </div>
     </div>
 
   </div>
@@ -46,6 +90,7 @@
 <script>
 import pages from '../http/pages'
 import draggable from 'vuedraggable'
+import planetChartData from '../assets/chart-data.js';
 
 
 export default {
@@ -55,30 +100,22 @@ export default {
   },
   data() {
     return {
-      pages: [],
-      pages2: []
+      planetChartData: planetChartData
 
     }
   },
   methods: {
-    get: function() {
-      var vm = this
-      pages.get()
-        .then(function(res) {
-          vm.pages = res.data
-          vm.pages2 = res.data
-        })
-        .catch(function(res) {
-          vm.pages = res.data
-        })
-    },
-    view: function() {
-      console.log(this.pages2);
+    createChart(chartId, chartData) {
+      const ctx = document.getElementById(chartId);
+      const myChart = new Chart(ctx, {
+        type: chartData.type,
+        data: chartData.data,
+        options: chartData.options,
+      });
     }
-
   },
-  beforeMount() {
-    this.get()
+  mounted() {
+    this.createChart('planet-chart', this.planetChartData);
   }
 }
 </script>

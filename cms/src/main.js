@@ -7,7 +7,7 @@ import VModal from 'vue-js-modal'
 import VueClipboard from 'vue-clipboard2'
 import VueClazyLoad from 'vue-clazy-load'
 import VueDraggable from 'vuedraggable'
-
+import Chart from 'chart.js';
 import config from './config.json'
 
 Vue.config.productionTip = false

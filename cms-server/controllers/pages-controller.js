@@ -13,6 +13,11 @@ exports.get_pages = function(req, res) {
 
 exports.save_pages = function(req, res) {
     var data = new pages(req.body);
+    data.author = {
+      firstName: req.auth.firstName,
+      lastName: req.auth.lastName,
+      id: req.auth.id
+    }
     data.save(function(err, task11) {
         if (err)
             res.send(err);
@@ -31,6 +36,11 @@ exports.read_pages = function(req, res) {
 
 
 exports.update_pages = function(req, res) {
+  req.body['author'] = {
+    firstName: req.auth.firstName,
+    lastName: req.auth.lastName,
+    id: req.auth.id
+  }
     pages.findOneAndUpdate({
         _id: req.params.id
     }, req.body, {

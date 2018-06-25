@@ -6,7 +6,7 @@ var fs = require('fs');
 var Gridfs = require('gridfs-stream');
 
 exports.upload_file = function(req, res) {
-
+  console.log('upload',req.auth);
   var db = mongoose.connection.db;
   var mongoDriver = mongoose.mongo;
   var gfs = new Gridfs(db, mongoDriver);

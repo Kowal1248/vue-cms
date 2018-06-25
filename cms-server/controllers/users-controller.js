@@ -3,15 +3,18 @@ var mongoose = require('mongoose'),
 
 var bcrypt = require('bcrypt');
 var jwt = require('jwt-simple');
-var secretKey = 'BCQ1mkoOdAOv26sxEOHw'
+var config = require('../config')
+
+var secretKey = config.secret
 
 
 exports.generate_session = function(req, res, next) {
   Users.findOne({
       email: req.body.email
     })
-    .select('password email person company')
+    .select('password email firstName lastName _id')
     .exec(function(err, user) {
+      console.log(user);
       if (err) {
         return next(err)
       }
@@ -27,9 +30,11 @@ exports.generate_session = function(req, res, next) {
         }
         console.log(user);
         var token = jwt.encode({
-          email: user.email
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName
         }, secretKey)
-        res.json({token: token, email:user.email})
+        res.json({token: token, email:user.email, firstName: user.firstName, lastName: user.lastName, id: user._id})
       })
     })
 }

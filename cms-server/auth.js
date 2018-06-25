@@ -1,12 +1,15 @@
+var jwt = require('jwt-simple')
+var config = require('./config')
+module.exports = function(req, res, next) {
+  if (req.headers['x-auth']) {
+    try {
+      req.auth = jwt.decode(req.headers['x-auth'], config.secret)
+    } catch (err) {
+      req.auth = null
+    }
 
-exports.authorize = function(req, res, next) {
-  var apiToken = req.headers['x-auth'];
-  console.log(apiToken);
-  if(!apiToken){
-    res.redirect('/dupa');
 
-  } else {
-    next();
+    //console.log("Auth:", req.auth.user_id)
   }
-
+  next()
 }
