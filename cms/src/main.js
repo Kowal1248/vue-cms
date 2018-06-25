@@ -8,6 +8,7 @@ import VueClipboard from 'vue-clipboard2'
 import VueClazyLoad from 'vue-clazy-load'
 import VueDraggable from 'vuedraggable'
 
+import config from './config.json'
 
 Vue.config.productionTip = false
 const options = {
@@ -48,7 +49,6 @@ import Media from './components/Media.vue'
 import Users from './components/Users.vue'
 import UsersAdd from './components/UsersAdd.vue'
 import Menu from './components/Menu.vue'
-
 import axios from 'axios'
 
 function requireAuth(to, from, next) {
@@ -126,12 +126,7 @@ const router = new VueRouter({
   ]
 })
 
-
-
-
-axios.get('http://10.0.17.8:8000/settings')
-.then(function(res) {
-  var settings = res.data[0];
+let settings = config.server;
 
   new Vue({
     el: '#app',
@@ -139,4 +134,3 @@ axios.get('http://10.0.17.8:8000/settings')
     settings,
     render: h => h(App)
   })
-})
