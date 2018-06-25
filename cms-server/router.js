@@ -13,11 +13,13 @@ module.exports = function(app) {
   //  var auth = require("../controllers/auth-controller")
   //  var allegro = require("../controllers/allegro-controller")
 
-
   app.route('/')
     .get(function(req, res) {
       res.sendFile(path.join(__dirname, '../cms/dist/', 'index.html'));
     })
+    app.route('/session')
+      .get(users.information_User)
+      .post(users.generate_session)
 
   app.route('/users')
     .get(users.get_Users)

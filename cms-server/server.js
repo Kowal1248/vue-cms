@@ -1,3 +1,4 @@
+
 var express = require('express'),
   app = express(),
   port = process.env.PORT || 8000,
@@ -28,7 +29,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-
 
 app.use('/css', express.static(path.join(__dirname, '../cms/dist/css/')));
 app.use('/js', express.static(path.join(__dirname, '../cms/dist/js/')));

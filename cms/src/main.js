@@ -54,10 +54,7 @@ import axios from 'axios'
 function requireAuth(to, from, next) {
   if (!auth.loggedIn()) {
     next({
-      path: '/login',
-      query: {
-        redirect: to.fullPath
-      }
+      path: '/login'
     })
   } else {
     next()
@@ -126,7 +123,7 @@ const router = new VueRouter({
   ]
 })
 
-let settings = config.server;
+let settings = config;
 
   new Vue({
     el: '#app',

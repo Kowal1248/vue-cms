@@ -1,6 +1,7 @@
+import axios from 'axios'
 
 export default {
-  login (email, pass, cb) {
+  login(email, pass, cb) {
 
     cb = arguments[arguments.length - 1]
     if (localStorage.token) {
@@ -10,7 +11,10 @@ export default {
     }
     pretendRequest(email, pass, (res) => {
       if (res.authenticated) {
+        axios.defaults.headers.common['X-Auth'] = res.token;
+
         localStorage.token = res.token
+        localStorage.email = res.email
         if (cb) cb(true)
         this.onChange(true)
       } else {
@@ -20,32 +24,41 @@ export default {
     })
   },
 
-  getToken () {
+  getToken() {
     return localStorage.token
   },
 
-  logout (cb) {
+  logout(cb) {
     delete localStorage.token
+    delete localStorage.email
     if (cb) cb()
     this.onChange(false)
   },
 
-  loggedIn () {
+  loggedIn() {
     return !!localStorage.token
   },
 
-  onChange () {}
+  onChange() {}
 }
 
-function pretendRequest (email, pass, cb) {
-  setTimeout(() => {
-    if (email === 'joe@example.com' && pass === 'password1') {
+function pretendRequest(email, pass, cb) {
+  axios.post('http://10.0.17.8:8000/session', {
+      email: email,
+      password: pass
+    })
+    .then(function(res) {
+      var data = res.data
       cb({
         authenticated: true,
-        token: Math.random().toString(36).substring(7)
+        token: data.token,
+        email: data.email
       })
-    } else {
-      cb({ authenticated: false })
-    }
-  }, 0)
+      axios.defaults.headers.common['X-Auth'] = data.token;
+    })
+    .catch(function(res) {
+      cb({
+        authenticated: false
+      })
+    })
 }
