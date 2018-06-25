@@ -8,6 +8,8 @@ var express = require('express'),
   Task2 = require('./models/upload-model')
   Task3 = require('./models/users-model')
   Task4 = require('./models/menu-model')
+  Task5 = require('./models/blog-model')
+  Task6 = require('./models/category-model')
 
   path = require("path"),
 

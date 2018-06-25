@@ -177,11 +177,10 @@ export default {
       media.post(this.file)
         .then(function(res) {
           vm.$swal({
-            type: 'info',
-            title: 'Your work has been saved',
-            buttons:{
-              show:false
-            },
+            type: "success",
+            title: 'Zapisałem',
+            showCloseButton: false,
+            showConfirmButton: false,
             timer: 1000
           })
           vm.get()

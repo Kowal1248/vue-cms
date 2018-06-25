@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var uploadSchema = new Schema({
+var categorySchema = new Schema({
   update: {type: Date, default:Date.now },
+  name: String
 
-  media: String
 });
 
-module.exports = mongoose.model('Upload', uploadSchema);
+
+module.exports = mongoose.model('category', categorySchema);

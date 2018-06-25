@@ -1,4 +1,5 @@
 import axios from 'axios'
+import config from './config'
 
 export default {
   login(email, pass, cb) {
@@ -43,7 +44,7 @@ export default {
 }
 
 function pretendRequest(email, pass, cb) {
-  axios.post('http://10.0.17.8:8000/session', {
+  axios.post(config.server + '/session', {
       email: email,
       password: pass
     })

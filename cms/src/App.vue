@@ -20,9 +20,11 @@
           <router-link to="/media"> <a><span class="ti-link menu-icon" style="color: #ff5722;"></span>Media</a></router-link>
         </li>
         <li>
-          <router-link to="/pages"> <a><span class="ti-layers menu-icon" style="color: #673ab7"></span>Strony</a></router-link>
+          <router-link to="/pages"> <a><span class="ti-layout-tab-v menu-icon" style="color: #673ab7"></span>Strony</a></router-link>
         </li>
-
+        <li>
+          <router-link to="/blog"> <a><span class="ti-layers menu-icon" style="color: #673ab7"></span>Blog</a></router-link>
+        </li>
         <li>
           <router-link to="/menu"> <a><span class="ti-list menu-icon" style="color:#e91e63"></span>Menu</a></router-link>
         </li>
@@ -35,7 +37,7 @@
         <li>
           <a href="/logout"><span class="ti-angle-left menu-icon" style="color: #009688"></span>Wyloguj</a>
         </li>
-  
+
       </ul>
     </div>
 
@@ -253,4 +255,7 @@ export default {
 <style lang="scss">@import './styles/custom-bootstrap.scss';
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import './styles/themify-icons.css';
-@import './styles/custom.css';</style>
+@import './styles/custom.css';
+@import './styles/fab.css';
+
+</style>

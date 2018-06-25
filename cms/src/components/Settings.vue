@@ -48,7 +48,13 @@ export default {
       settings.save(this.settings)
       .then(function(res){
         console.log(res);
-        vm.$swal('success')
+        vm.$swal({
+          type: "success",
+          title: 'Zapisałem',
+          showCloseButton: false,
+          showConfirmButton: false,
+          timer: 1000
+        })
       })
       .catch(function(res){
         console.log(res);

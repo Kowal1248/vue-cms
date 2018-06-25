@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueProgressBar from 'vue-progressbar'
-import VueSwal from 'vue-swal'
+import VueSwal from 'vue-sweetalert2'
 import wysiwyg from "vue-wysiwyg";
 import VModal from 'vue-js-modal'
 import VueClipboard from 'vue-clipboard2'
@@ -9,6 +9,9 @@ import VueClazyLoad from 'vue-clazy-load'
 import VueDraggable from 'vuedraggable'
 import Chart from 'chart.js';
 import config from './config.json'
+import fab from 'vue-fab'
+import moment from 'moment'
+
 
 Vue.config.productionTip = false
 const options = {
@@ -24,7 +27,11 @@ const options = {
   location: 'top',
   inverse: false
 }
-
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('DD.MM.YYYY hh:mm')
+  }
+})
 Vue.use(VueProgressBar, options)
 Vue.use(VueRouter)
 Vue.use(VueSwal)
@@ -33,13 +40,18 @@ Vue.use(VueClipboard)
 Vue.use(VueClazyLoad)
 Vue.use(VueDraggable)
 Vue.use(wysiwyg, {});
-
+Vue.use(fab)
 
 import auth from './auth'
 import App from './App.vue'
 import Pages from './components/Pages.vue'
 import PagesEdit from './components/PagesEdit.vue'
 import PagesAdd from './components/PagesAdd.vue'
+
+import Blog from './components/Blog.vue'
+import BlogEdit from './components/BlogEdit.vue'
+import BlogAdd from './components/BlogAdd.vue'
+
 import Dashboard from './components/Dashboard.vue'
 import Login from './components/Login.vue'
 import Settings from './components/Settings.vue'
@@ -78,6 +90,18 @@ const router = new VueRouter({
       path: '/pages/add',
       component: PagesAdd
     },
+    {
+        path: '/blog',
+        component: Blog
+      },
+      {
+        path: '/blog/edit/:id',
+        component: BlogEdit
+      },
+      {
+        path: '/blog/add',
+        component: BlogAdd
+      },
     {
       path: '/settings',
       component: Settings

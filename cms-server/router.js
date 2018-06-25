@@ -5,6 +5,9 @@ module.exports = function(app) {
   var path = require("path");
   var mes = require("./controllers/settings-controller")
   var pages = require("./controllers/pages-controller")
+  var blog = require("./controllers/blog-controller")
+  var category = require("./controllers/category-controller")
+
   var users = require("./controllers/users-controller")
   var menu = require("./controllers/menu-controller")
 
@@ -47,6 +50,24 @@ module.exports = function(app) {
     .get(pages.read_pages)
     .put(pages.update_pages)
     .delete(pages.delete_pages)
+
+    app.route('/blog')
+      .get(blog.get_blog)
+      .post(blog.save_blog)
+
+    app.route('/blog/:id')
+      .get(blog.read_blog)
+      .put(blog.update_blog)
+      .delete(blog.delete_blog)
+
+      app.route('/category')
+        .get(category.get_category)
+        .post(category.save_category)
+
+      app.route('/category/:id')
+        .get(category.read_category)
+        .put(category.update_category)
+        .delete(category.delete_category)
 
   app.route('/menu')
     .get(menu.get_menu)

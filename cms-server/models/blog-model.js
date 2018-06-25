@@ -1,10 +1,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var pagesSchema = new Schema({
+var blogSchema = new Schema({
+
   update: {type: Date, default:Date.now },
   seo: {},
   website: {},
+  category: {
+    _id: String,
+    name: String
+  },
   author:{
     firstName:String,
     lastName:String,
@@ -15,4 +20,4 @@ var pagesSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('pages', pagesSchema);
+module.exports = mongoose.model('blog', blogSchema);

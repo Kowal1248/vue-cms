@@ -22,14 +22,7 @@
             <input type="submit" value="Zaloguj" class="forms_buttons-action" style="width:100%">
           </div>
         </form>
-        <div class="row" style="margin-top:50px">
-          <div class="col-md-2">
-            <span class="pulse" style="margin:0px"></span>
-          </div>
-          <div class="col-md-10" style="padding-top:5px;padding-left:0px">
-            Serwer status: Online :)
-          </div>
-        </div>
+      
 
       </div>
     </div>

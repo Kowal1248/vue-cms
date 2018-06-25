@@ -66,7 +66,8 @@ export default {
   data() {
     return {
       pages: [],
-      menu: []
+      menu: [],
+      tmpMenu: []
     }
   },
   methods: {
@@ -86,6 +87,7 @@ export default {
         .then(function(res) {
           if (res.data.length != 0) {
             vm.menu = res.data
+            vm.tmpMenu = res.data
           }
         })
         .catch(function(res) {
@@ -97,16 +99,35 @@ export default {
     },
     save: function() {
       var v = this
+      for (var i = 0; i < v.tmpMenu.length; i++) {
+        menu.delete(v.tmpMenu[i]._id)
+        .then(function(res) {
+          v.getMenu()
+        })
+        .catch(function(res) {
+          console.log(res);
+        })
 
+      }
       for (var i = 0; i < v.menu.length; i++) {
         console.log('id: ',v.menu[i]._id);
+
         menu.save({name: v.menu[i].name, idPage: v.menu[i]._id, website: v.menu[i].website, index: i})
           .then(function(res) {
-            v.getMenu()
+
           })
           .catch(function(res) {
             console.log(res);
           })
+
+          if(i == v.menu.length -1)
+            v.$swal({
+              type: "success",
+              title: 'Zapisałem',
+              showCloseButton: false,
+              showConfirmButton: false,
+              timer: 1000
+            })
       }
     },
     trash: function(id) {
@@ -120,7 +141,7 @@ export default {
 
       menu.delete(id)
         .then(function(res) {
-          console.log(res);
+          vm.getMenu()
 
         })
         .catch(function(res) {
@@ -129,12 +150,16 @@ export default {
 
     },
     check: function(id){
-      console.log(id);
+
       var menu = this.menu
       var view = true
+      console.log('id: ', id);
       for (var i = 0; i < menu.length; i++) {
-        if(menu[i]._id == id)
+          console.log('id: ', menu[i].idPage, id);
+        if(menu[i].idPage == id){
+          console.log('znalazlem',id);
           view = false
+        }
       }
       return view
     }

@@ -3,7 +3,13 @@
 
   <div class="container-fluid">
     <h3>Kokpit</h3>
-
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          System aktualny: v.1.0.0
+        </li>
+      </ol>
+    </nav>
 
     <div class="row">
       <draggable>
@@ -55,7 +61,7 @@
     <div class="row">
 
       <draggable>
-        <div class="col-md-8" style="float:left;">
+        <div class="col-md-7" style="float:left;">
           <div class="box">
             <h6 class="box-title">Statystyka wejść</h6>
             <hr>
@@ -63,25 +69,70 @@
 
           </div>
         </div>
-        <div class="col-md-4" style="float:left;">
+        <div class="col-md-5" style="float:left;">
           <div class="box">
             <h6 class="box-title">Lista logowań</h6>
+            <table class="table">
+              <thead>
 
+                  <th>Nr:</th>
+                  <th>e-mail</th>
+                  <th>IP</th>
+                  <th>Data</th>
+
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>admin@ex.pl</td>
+                  <td>89.99.21.222</td>
+                  <td>21.01.2018 16:30</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>admin@ex.pl</td>
+                  <td>89.99.21.222</td>
+                  <td>21.01.2018 16:30</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>admin@ex.pl</td>
+                  <td>89.99.21.222</td>
+                  <td>21.01.2018 16:30</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>admin@ex.pl</td>
+                  <td>89.99.21.222</td>
+                  <td>21.01.2018 16:30</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>admin@ex.pl</td>
+                  <td>89.99.21.222</td>
+                  <td>21.01.2018 16:30</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>admin@ex.pl</td>
+                  <td>89.99.21.222</td>
+                  <td>21.01.2018 16:30</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>admin@ex.pl</td>
+                  <td>89.99.21.222</td>
+                  <td>21.01.2018 16:30</td>
+                </tr>
+              </tbody>
+            </table>
             <hr>
           </div>
         </div>
       </draggable>
     </div>
 
-    <div class="row">
-      <div class="col-md-12" style="float:left;">
-        <div class="box">
-          <h6 class="box-title">Wyślij e-mail'a do zarejestrowanych osób:</h6>
-          <hr>
 
-        </div>
-          </div>
-    </div>
 
   </div>
 

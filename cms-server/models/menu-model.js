@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var menuSchema = new Schema({
+  update: {type: Date, default:Date.now },
 
 
     name: String,

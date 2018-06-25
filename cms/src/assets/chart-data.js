@@ -32,10 +32,10 @@ export const planetChartData = {
         label: 'Ten tydzień',
         data: [4.8, 12.1, 12.7, 6.7, 139.8, 116.4, 50.7, 49.2],
         backgroundColor: [
-          'rgba(71, 183,132,.5)', 
+          'rgba(33, 150, 243,.5)',
         ],
         borderColor: [
-          '#47b784',
+          'rgba(33, 150, 243)',
         ],
         borderWidth: 3
       }
