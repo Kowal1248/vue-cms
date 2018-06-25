@@ -1,0 +1,23 @@
+{
+  "name": "damian",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "gridfs": "^1.0.0",
+    "gridfs-stream": "^1.1.1",
+    "multer": "^1.3.0",
+    "multer-gridfs-storage": "^3.0.1",
+    "multiparty": "^4.1.4",
+    "npm": "^6.0.0"
+  }
+}
