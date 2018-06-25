@@ -39,8 +39,8 @@ build/Release
 
 # Dependency directories
 cms/node_modules/
-cms-server/node_modules/
-cms-server/.db
+*/node_modules/
+*/.db
 jspm_packages/
 
 # TypeScript v1 declaration files
