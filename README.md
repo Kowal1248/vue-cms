@@ -3,8 +3,10 @@
 Under construction :)
 
 ## Installation
+0. Download:
+1. `git clone https://github.com/Kowal1248/vue-cms.git`
 1. App:
-  1. Go to `cd ./cms`
+1.1 Go to `cd ./cms`
   2. Install all packages `npm install`
 
 3. Server:
