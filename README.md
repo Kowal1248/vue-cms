@@ -13,6 +13,10 @@ Server:
   1. Go to `cd ./cms-server`
   2. Install all packages `npm install`
 
+Database:
+  1. Go to `https://www.mongodb.com/download-center?jmp=nav#community`
+  2. Download and install mongodb server
+
 ## Run
 Developer version:
   1. Go to `cd ./cms`
