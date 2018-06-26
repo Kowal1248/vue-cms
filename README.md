@@ -1,4 +1,4 @@
-# First  cms build by VueJS 2
+# Cms build by VueJS 2 / NodeJS / MongoDB
 
 Under construction :)
 
