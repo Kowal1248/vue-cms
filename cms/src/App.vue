@@ -35,7 +35,7 @@
           <router-link to="/users"> <a><span class="ti-user menu-icon" style="color: #f44336"></span>Użytkownicy</a></router-link>
         </li>
         <li>
-          <a href="/logout"><span class="ti-angle-left menu-icon" style="color: #009688"></span>Wyloguj</a>
+          <router-link to="/logout"> <a><span class="ti-angle-left menu-icon" style="color: #009688"></span>Wyloguj</a></router-link>
         </li>
 
       </ul>

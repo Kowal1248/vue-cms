@@ -35,7 +35,9 @@ Vue.filter('formatDate', function(value) {
 Vue.use(VueProgressBar, options)
 Vue.use(VueRouter)
 Vue.use(VueSwal)
-Vue.use(VModal, { dialog: true })
+Vue.use(VModal, {
+  dialog: true
+})
 Vue.use(VueClipboard)
 Vue.use(VueClazyLoad)
 Vue.use(VueDraggable)
@@ -89,20 +91,20 @@ const router = new VueRouter({
       beforeEnter: requireAuth
     },
     {
-        path: '/blog',
-        component: Blog,
-        beforeEnter: requireAuth
-      },
-      {
-        path: '/blog/edit/:id',
-        component: BlogEdit,
-        beforeEnter: requireAuth
-      },
-      {
-        path: '/blog/add',
-        component: BlogAdd,
-        beforeEnter: requireAuth
-      },
+      path: '/blog',
+      component: Blog,
+      beforeEnter: requireAuth
+    },
+    {
+      path: '/blog/edit/:id',
+      component: BlogEdit,
+      beforeEnter: requireAuth
+    },
+    {
+      path: '/blog/add',
+      component: BlogAdd,
+      beforeEnter: requireAuth
+    },
     {
       path: '/settings',
       component: Settings,
@@ -141,7 +143,7 @@ const router = new VueRouter({
       path: '/logout',
       beforeEnter(to, from, next) {
         auth.logout()
-        next('/')
+        next('/login')
       }
     }
   ]
@@ -153,10 +155,10 @@ let settings = config
 let language = require("./language/" + settings.language + ".json");
 
 
-  new Vue({
-    el: '#app',
-    router,
-    settings,
-    language,
-    render: h => h(App)
-  })
+new Vue({
+  el: '#app',
+  router,
+  settings,
+  language,
+  render: h => h(App)
+})
