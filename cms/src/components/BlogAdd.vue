@@ -53,10 +53,9 @@
           <hr>
           <div class="row">
             <div class="col-md-12">
-{{page.category}}
               <select class="form-control" v-model="page.category">
-              <option value="undefined">Brak kategorii</option>
-              <option :value="item"  v-for="item in category">{{item.name}}</option>
+              <option :value="un" selected>Brak kategorii</option>
+              <option :value="item"  v-for="item in category" :key="item._id">{{item.name}}</option>
             </select>
             </div>
           </div>
@@ -105,6 +104,7 @@ export default {
 
   data() {
     return {
+      un: {_id: "0", name: "Niezdefiniowane"},
       category: [],
       page: {
         category: {},
@@ -127,8 +127,11 @@ export default {
         .then(function(res) {
           vm.category = res.data
         })
-        .catch(function(res) {
-
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     },
     addCategory: function() {
@@ -144,21 +147,17 @@ export default {
         cancelButtonText: 'Zamknij',
         showLoaderOnConfirm: true,
         preConfirm: (login) => {
-          console.log(login);
           return category.save({
               name: login
             })
-            .then(response => {
-
-
-            })
             .catch(error => {
-              vm.$swal.showValidationError(
-                `Request failed: ${error}`
+              vm.$swal('Ups... coś poszło nie tak',
+                `Błąd: ${error}`,
+                'warning'
               )
             })
         },
-        allowOutsideClick: () => !swal.isLoading()
+        allowOutsideClick: () => !vm.$swal.isLoading()
       }).then((result) => {
         if (result.value) {
           vm.getCategory()
@@ -177,7 +176,7 @@ export default {
       data.website.href = data.website.title
       data.status = status
       blog.save(data)
-        .then(function(res) {
+        .then(function() {
           vm.$swal({
             type: "success",
             title: 'Zapisałem',
@@ -186,8 +185,11 @@ export default {
             timer: 1000
           })
         })
-        .catch(function(res) {
-          vm.$swal('err')
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     }
   },

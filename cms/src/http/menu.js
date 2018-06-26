@@ -16,7 +16,6 @@ export default {
   },
 
   put(data){
-    console.log(data);
     return axios.put(config.server + '/menu/' + data._id, data)
   },
 

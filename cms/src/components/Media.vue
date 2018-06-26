@@ -18,17 +18,19 @@
       <hr>
       <div class="large-12 medium-12 small-12 cell">
 
-        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
+        <input type="file" id="file" ref="file" class="form-control" style="width:90%;float:left"  v-on:change="handleFileUpload()" />
 
-        <button v-on:click="submitFile()" class="btn btn-primary">Wyślij</button>
+        <button v-on:click="submitFile()" class="btn btn-primary" style="margin-left:20px">Wyślij</button>
       </div>
     </div>
+<div class="row">
+<div class="col-md-12">
 
-    <div class="box" style="height:60vh">
+    <div class="box" style="height:500px;overflow-y:auto">
       <h6 class="box-title">Pliki
     </h6>
       <hr>
-      <div v-for="item in files" v-if="item.media != undefined">
+      <div v-for="item in limitedItems" v-if="item.media != undefined" :key="item._id">
         <div class="card" style="width: 18rem;float:left;margin:5px;width:200px;">
           <clazy-load v-bind:src="url + item.media" class="card-img-top">
             <img v-bind:src="url + item.media" class="card-img-top" style="height:120px;">
@@ -48,7 +50,13 @@
       <div v-if="files.length == 0">
         <h3 style="text-align:center;padding-top:15%;">Brak plików</h3>
       </div>
+      <button @click="limitNumber += 3" class="btn btn-primary" style="width:100%" v-if="files.length > limitNumber">Pokaż więcej</button>
+      <button @click="limitNumber -= files.length -3" class="btn btn-primary" style="width:100%" v-if="files.length <= limitNumber && files.length != 0">Zwiń liste</button>
+
     </div>
+        </div></div>
+
+
 
     <v-dialog height="auto" :scrollable="true" />
   </div>
@@ -114,16 +122,21 @@
 import media from '../http/media'
 
 export default {
+  computed: {
+    limitedItems() {
+      return this.files.slice(0,this.limitNumber)
+    }
+  },
   data() {
     return {
       files: [],
       url: this.$root.$options.settings.url + "/media/",
-      data: ""
+      data: "",
+      limitNumber: 3
     }
   },
   methods: {
     show(data) {
-      console.log(data.media);
       this.data = this.url + data.media
       this.$modal.show('dialog', {
         title: 'Obrazek',
@@ -159,14 +172,25 @@ export default {
       media.get()
         .then(function(res) {
           vm.files = res.data
-          console.log(vm.files);
+        })
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     },
     del(item) {
       var vm = this
       media.delete(item)
-        .then(function(res) {
+        .then(function() {
           vm.get()
+        })
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     },
     handleFileUpload() {
@@ -175,7 +199,7 @@ export default {
     submitFile() {
       var vm = this
       media.post(this.file)
-        .then(function(res) {
+        .then(function() {
           vm.$swal({
             type: "success",
             title: 'Zapisałem',
@@ -185,8 +209,11 @@ export default {
           })
           vm.get()
         })
-        .catch(function(res) {
-          vm.$swal('err')
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     },
   },

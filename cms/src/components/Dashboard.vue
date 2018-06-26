@@ -12,6 +12,9 @@
     </nav>
 
     <div class="row">
+      <div class="col-md-12" style="padding:0px;">
+
+
       <draggable>
         <div class="col-md-3" style="float:left;">
           <div class="box">
@@ -56,9 +59,12 @@
           </div>
         </div>
       </draggable>
+        </div>
     </div>
 
     <div class="row">
+      <div class="col-md-12" style="padding:0px">
+
 
       <draggable>
         <div class="col-md-7" style="float:left;">
@@ -131,7 +137,7 @@
         </div>
       </draggable>
     </div>
-
+  </div>
 
 
   </div>
@@ -139,9 +145,9 @@
 </div>
 </template>
 <script>
-import pages from '../http/pages'
 import draggable from 'vuedraggable'
 import planetChartData from '../assets/chart-data.js';
+import Chart from 'chart.js';
 
 
 export default {
@@ -152,7 +158,6 @@ export default {
   data() {
     return {
       planetChartData: planetChartData
-
     }
   },
   methods: {

@@ -80,13 +80,23 @@ export default {
   },
   methods: {
     save() {
+      var vm = this
       users.save(this.person)
-      .then(function(res){
-        console.log(res);
-      })
-      .catch(function(res){
-        console.log(res);
-      })
+        .then(function() {
+          vm.$swal({
+            type: "success",
+            title: 'Zapisałem',
+            showCloseButton: false,
+            showConfirmButton: false,
+            timer: 1000
+          })
+        })
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
+        })
     }
   }
 }

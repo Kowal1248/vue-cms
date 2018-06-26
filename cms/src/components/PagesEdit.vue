@@ -9,12 +9,12 @@
       <ul class="fab-buttons">
 
         <li class="fab-buttons__item" v-on:click="trash">
-          <a  class="fab-buttons__link" data-tooltip="Usuń" >
-            <i class="icon-material icon-material_tw ti-trash" ></i>
+          <a class="fab-buttons__link" data-tooltip="Usuń">
+            <i class="icon-material icon-material_tw ti-trash"></i>
           </a>
         </li>
         <li class="fab-buttons__item" v-on:click="save(page,'sketch')">
-          <a  class="fab-buttons__link" data-tooltip="Dodaj jako szkic">
+          <a class="fab-buttons__link" data-tooltip="Dodaj jako szkic">
             <i class="icon-material icon-material_tw ti-pencil"></i>
           </a>
         </li>
@@ -124,51 +124,63 @@ export default {
         .replace("Ż", "Z")
         .replace("Ź", "Z")
     },
-    save: function(data,status) {
+    save: function(data, status) {
       var vm = this
       data.website.href = data.website.title
       data.status = status
       pages.put(data)
-        .then(function(res) {
-          vm.$swal({type: "success",
-          title: 'Zapisałem',
-          showCloseButton: false,
-          showConfirmButton: false,
-          timer: 1000})
+        .then(function() {
+          vm.$swal({
+            type: "success",
+            title: 'Zapisałem',
+            showCloseButton: false,
+            showConfirmButton: false,
+            timer: 1000
+          })
         })
-        .catch(function(res) {
-          vm.$swal('err')
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     },
     get: function(data) {
       var vm = this
       pages.get(data)
         .then(function(res) {
-          console.log(res.data);
           vm.page = res.data
           vm.changeUrl(vm.page.website.title)
         })
-        .catch(function(res) {
-          vm.$swal('err')
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     },
     trash: function() {
       var vm = this
       pages.delete(vm.$route.params.id)
-      .then(function(res) {
-        vm.$swal({type: "success",
-        title: 'Usunąłem dane.',
-        showCloseButton: false,
-        showConfirmButton: false,
-        timer: 1000})
-          .then(function(){
-            vm.$router.push('/pages') 
-          })
-      })
+        .then(function() {
+          vm.$swal({
+              type: "success",
+              title: 'Usunąłem dane.',
+              showCloseButton: false,
+              showConfirmButton: false,
+              timer: 1000
+            })
+            .then(function() {
+              vm.$router.push('/pages')
+            })
+        })
 
-      .catch(function(res) {
-        vm.$swal('err')
-      })
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
+        })
     }
   },
   beforeMount() {

@@ -16,6 +16,7 @@ export default {
 
         localStorage.token = res.token
         localStorage.email = res.email
+
         if (cb) cb(true)
         this.onChange(true)
       } else {
@@ -37,6 +38,9 @@ export default {
   },
 
   loggedIn() {
+
+    axios.defaults.headers.common['X-Auth'] = localStorage.token;
+
     return !!localStorage.token
   },
 
@@ -57,7 +61,7 @@ function pretendRequest(email, pass, cb) {
       })
       axios.defaults.headers.common['X-Auth'] = data.token;
     })
-    .catch(function(res) {
+    .catch(function() {
       cb({
         authenticated: false
       })

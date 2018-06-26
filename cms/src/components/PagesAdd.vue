@@ -98,7 +98,7 @@ export default {
       data.website.href = data.website.title
       data.status = status
       pages.save(data)
-      .then(function(res){
+      .then(function(){
         vm.$swal({
           type: "success",
           title: 'Zapisałem',
@@ -107,9 +107,11 @@ export default {
           timer: 1000
         })
       })
-      .catch(function(res){
-        vm.$swal('err')
-
+      .catch(error => {
+        vm.$swal('Ups... coś poszło nie tak',
+          `Błąd: ${error}`,
+          'warning'
+        )
       })
     }
 }

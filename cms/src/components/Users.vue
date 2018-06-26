@@ -28,8 +28,8 @@
                 <th>Operacje</th>
               </tr>
             </thead>
-            <tbody v-for="(item, index) in users">
-              <tr>
+            <tbody >
+              <tr v-for="(item, index) in users" :key="item._id">
                 <td>{{index +1 }}</td>
                 <td>{{item.firstName}}</td>
                 <td>{{item.lastName}}</td>
@@ -60,11 +60,13 @@ export default {
       var vm = this
       users.get()
       .then(function(res){
-        console.log(res.data);
         vm.users = res.data
       })
-      .catch(function(res){
-        console.log(res);
+      .catch(error => {
+        vm.$swal('Ups... coś poszło nie tak',
+          `Błąd: ${error}`,
+          'warning'
+        )
       })
     }
   },

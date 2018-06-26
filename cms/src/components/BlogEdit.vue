@@ -64,7 +64,7 @@
               <select class="form-control" v-model="page.category">
               <option value="undefined">Brak kategorii</option>
 
-              <option :value="item" v-for="item in category" :selected="item._id == page.category._id">{{item.name}}</option>
+              <option :value="item" v-for="item in category" :key="item._id" :selected="item._id == page.category._id">{{item.name}}</option>
             </select>
             </div>
           </div>
@@ -137,8 +137,11 @@ export default {
         .then(function(res) {
             vm.category = res.data
         })
-        .catch(function(res){
-
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     },
     addCategory: function() {
@@ -154,19 +157,15 @@ export default {
         cancelButtonText: 'Zamknij',
         showLoaderOnConfirm: true,
         preConfirm: (login) => {
-          console.log(login);
           return category.save({name: login})
-            .then(response => {
-
-
-            })
             .catch(error => {
-              vm.$swal.showValidationError(
-                `Request failed: ${error}`
+              vm.$swal('Ups... coś poszło nie tak',
+                `Błąd: ${error}`,
+                'warning'
               )
             })
         },
-        allowOutsideClick: () => !swal.isLoading()
+        allowOutsideClick: () => !vm.$swal.isLoading()
       }).then((result) => {
         if (result.value) {
           vm.getCategory()
@@ -206,33 +205,38 @@ export default {
       data.website.href = data.website.title
       data.status = status
       blog.put(data)
-        .then(function(res) {
+        .then(function() {
           vm.$swal({type: "success",
           title: 'Zapisałem',
           showCloseButton: false,
           showConfirmButton: false,
           timer: 1000})
         })
-        .catch(function(res) {
-          vm.$swal('err')
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     },
     get: function(data) {
       var vm = this
       blog.get(data)
         .then(function(res) {
-          console.log(res.data);
           vm.page = res.data
           vm.changeUrl(vm.page.website.title)
         })
-        .catch(function(res) {
-          vm.$swal('err')
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     },
     trash: function() {
       var vm = this
       blog.delete(vm.$route.params.id)
-      .then(function(res) {
+      .then(function() {
         vm.$swal({type: "success",
         title: 'Usunąłem dane.',
         showCloseButton: false,
@@ -242,9 +246,11 @@ export default {
             vm.$router.push('/blog')
           })
       })
-
-      .catch(function(res) {
-        vm.$swal('err')
+      .catch(error => {
+        vm.$swal('Ups... coś poszło nie tak',
+          `Błąd: ${error}`,
+          'warning'
+        )
       })
     }
   },

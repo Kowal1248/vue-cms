@@ -7,7 +7,6 @@ import VModal from 'vue-js-modal'
 import VueClipboard from 'vue-clipboard2'
 import VueClazyLoad from 'vue-clazy-load'
 import VueDraggable from 'vuedraggable'
-import Chart from 'chart.js';
 import config from './config.json'
 import fab from 'vue-fab'
 import moment from 'moment'
@@ -55,13 +54,10 @@ import BlogAdd from './components/BlogAdd.vue'
 import Dashboard from './components/Dashboard.vue'
 import Login from './components/Login.vue'
 import Settings from './components/Settings.vue'
-import Sexy from './components/Sexy.vue'
-import httpSettings from './http/settings'
 import Media from './components/Media.vue'
 import Users from './components/Users.vue'
 import UsersAdd from './components/UsersAdd.vue'
 import Menu from './components/Menu.vue'
-import axios from 'axios'
 
 function requireAuth(to, from, next) {
   if (!auth.loggedIn()) {
@@ -73,38 +69,43 @@ function requireAuth(to, from, next) {
   }
 }
 
-
-
 const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [{
       path: '/pages',
-      component: Pages
+      component: Pages,
+      beforeEnter: requireAuth
     },
     {
       path: '/pages/edit/:id',
-      component: PagesEdit
+      component: PagesEdit,
+      beforeEnter: requireAuth
     },
     {
       path: '/pages/add',
-      component: PagesAdd
+      component: PagesAdd,
+      beforeEnter: requireAuth
     },
     {
         path: '/blog',
-        component: Blog
+        component: Blog,
+        beforeEnter: requireAuth
       },
       {
         path: '/blog/edit/:id',
-        component: BlogEdit
+        component: BlogEdit,
+        beforeEnter: requireAuth
       },
       {
         path: '/blog/add',
-        component: BlogAdd
+        component: BlogAdd,
+        beforeEnter: requireAuth
       },
     {
       path: '/settings',
-      component: Settings
+      component: Settings,
+      beforeEnter: requireAuth
     },
     {
       path: '/',
@@ -116,24 +117,24 @@ const router = new VueRouter({
       component: Login
     },
     {
-      path: '/sexy',
-      component: Sexy
-    },
-    {
       path: '/media',
-      component: Media
+      component: Media,
+      beforeEnter: requireAuth
     },
     {
       path: '/users',
       component: Users,
+      beforeEnter: requireAuth
     },
     {
       path: '/users/add',
       component: UsersAdd,
+      beforeEnter: requireAuth
     },
     {
       path: '/menu',
-      component: Menu
+      component: Menu,
+      beforeEnter: requireAuth
     },
 
 

@@ -46,8 +46,7 @@ export default {
     save() {
       var vm = this
       settings.save(this.settings)
-      .then(function(res){
-        console.log(res);
+      .then(function(){
         vm.$swal({
           type: "success",
           title: 'Zapisałem',
@@ -56,8 +55,11 @@ export default {
           timer: 1000
         })
       })
-      .catch(function(res){
-        console.log(res);
+      .catch(error => {
+        vm.$swal('Ups... coś poszło nie tak',
+          `Błąd: ${error}`,
+          'warning'
+        )
       })
     }
   },
@@ -68,6 +70,12 @@ export default {
     let vm = this
     settings.get().then(function(res){
       vm.settings = res.data[0];
+    })
+    .catch(error => {
+      vm.$swal('Ups... coś poszło nie tak',
+        `Błąd: ${error}`,
+        'warning'
+      )
     })
   }
 }

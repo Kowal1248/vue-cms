@@ -20,7 +20,7 @@
         </h6>
           <hr>
           <draggable v-model="menu" class="dragArea" :options="{group:'people'}">
-            <div v-for="item in menu" :key="item.name" class="panel" style="margin-bottom:10px" >
+            <div v-for="item in menu" :key="item.name" class="panel" style="margin-bottom:10px">
               <span class="ti-trash" style="float:right" v-on:click="trash(item.idPage)"></span>
 
               <p>Nazwa: <input type="text" name="" v-model="item.name"></p>
@@ -77,8 +77,11 @@ export default {
         .then(function(res) {
           vm.pages = res.data
         })
-        .catch(function(res) {
-          vm.pages = res.data
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     },
     getMenu: function() {
@@ -90,74 +93,83 @@ export default {
             vm.tmpMenu = res.data
           }
         })
-        .catch(function(res) {
-
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
     },
     view: function() {
-      console.log(this.menu);
     },
     save: function() {
       var v = this
-      for (var i = 0; i < v.tmpMenu.length; i++) {
+      var i = 0
+      for (i = 0; i < v.tmpMenu.length; i++) {
         menu.delete(v.tmpMenu[i]._id)
-        .then(function(res) {
-          v.getMenu()
-        })
-        .catch(function(res) {
-          console.log(res);
-        })
+          .then(function() {
+            v.getMenu()
+          })
+          .catch(error => {
+            v.$swal('Ups... coś poszło nie tak',
+              `Błąd: ${error}`,
+              'warning'
+            )
+          })
 
       }
-      for (var i = 0; i < v.menu.length; i++) {
-        console.log('id: ',v.menu[i]._id);
-
-        menu.save({name: v.menu[i].name, idPage: v.menu[i]._id, website: v.menu[i].website, index: i})
-          .then(function(res) {
-
+      for (i = 0; i < v.menu.length; i++) {
+        menu.save({
+            name: v.menu[i].name,
+            idPage: v.menu[i]._id,
+            website: v.menu[i].website,
+            index: i
           })
-          .catch(function(res) {
-            console.log(res);
+          .catch(error => {
+            v.$swal('Ups... coś poszło nie tak',
+              `Błąd: ${error}`,
+              'warning'
+            )
           })
 
-          if(i == v.menu.length -1)
-            v.$swal({
-              type: "success",
-              title: 'Zapisałem',
-              showCloseButton: false,
-              showConfirmButton: false,
-              timer: 1000
-            })
+        if (i == v.menu.length - 1)
+          v.$swal({
+            type: "success",
+            title: 'Zapisałem',
+            showCloseButton: false,
+            showConfirmButton: false,
+            timer: 1000
+          })
       }
     },
     trash: function(id) {
       var vm = this
+
       for (var i = 0; i < this.menu.length; i++) {
         if (this.menu[i].idPage == id) {
-          var id = vm.menu[i]._id
+          id = vm.menu[i]._id
           this.menu.splice(this.menu.indexOf(menu[i]), 1);
         }
       }
 
       menu.delete(id)
-        .then(function(res) {
+        .then(function() {
           vm.getMenu()
-
         })
-        .catch(function(res) {
-          console.log(res);
+        .catch(error => {
+          vm.$swal('Ups... coś poszło nie tak',
+            `Błąd: ${error}`,
+            'warning'
+          )
         })
 
     },
-    check: function(id){
+    check: function(id) {
 
       var menu = this.menu
       var view = true
-      console.log('id: ', id);
       for (var i = 0; i < menu.length; i++) {
-          console.log('id: ', menu[i].idPage, id);
-        if(menu[i].idPage == id){
-          console.log('znalazlem',id);
+        if (menu[i].idPage == id) {
           view = false
         }
       }
