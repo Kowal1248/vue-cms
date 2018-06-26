@@ -177,10 +177,3 @@ export default {
   }
 }
 </script>
-<style >
-.panel {
-  border: 1px solid #eee;
-  border-radius: 0px;
-  padding: 10px;
-}
-</style>

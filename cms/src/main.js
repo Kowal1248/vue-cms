@@ -60,6 +60,8 @@ import Settings from './components/Settings.vue'
 import Media from './components/Media.vue'
 import Users from './components/Users.vue'
 import UsersAdd from './components/UsersAdd.vue'
+import UsersEdit from './components/UsersEdit.vue'
+
 import Menu from './components/Menu.vue'
 
 function requireAuth(to, from, next) {
@@ -132,6 +134,11 @@ const router = new VueRouter({
     {
       path: '/users/add',
       component: UsersAdd,
+      beforeEnter: requireAuth
+    },
+    {
+      path: '/users/edit/:id',
+      component: UsersEdit,
       beforeEnter: requireAuth
     },
     {

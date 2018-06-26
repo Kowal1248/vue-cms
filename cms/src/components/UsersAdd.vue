@@ -2,6 +2,19 @@
 <div id="page-content-wrapper">
   <div class="container-fluid">
     <h3>Użytkownicy</h3>
+    <div class="fab">
+      <span class="fab-action-button">
+            <i class="fab-action-button__icon ti-settings"></i>
+        </span>
+      <ul class="fab-buttons">
+
+        <li class="fab-buttons__item" v-on:click="save()">
+          <a href="#" class="fab-buttons__link" data-tooltip="Zapisz">
+            <i class="icon-material icon-material_tw ti-check"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -18,7 +31,7 @@
       <hr>
       <div class="row">
         <div class="col-md-12">
-          <form @submit.prevent="save">
+
             <div class="row">
               <div class="col-md-4">
                 <label for="">Imię:</label>
@@ -45,18 +58,118 @@
                 <label for="">Hasło:</label>
                 <input type="text" name="" value="" class="form-control" v-model="person.password">
               </div>
-
-              <div class="col-md-4">
-                <label for="">Uprawnienia:</label>
-                <input type="text" name="" value="" class="form-control" v-model="person.permission">
-              </div>
             </div>
             <div class="row" style="margin-top:10px">
               <div class="col-md-12">
-                <button type="submit" name="button" class="btn btn-primary" style="float:right">Zapisz</button>
               </div>
             </div>
-          </form>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="box">
+      <h6 class="box-title">Uprawnienia
+
+    </h6>
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
+    <thead>
+      <tr>
+        <th>Nr</th>
+        <th>Nazwa</th>
+        <th>Wyświetlenie</th>
+        <th>Zapis</th>
+        <th>Edycja</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Media</td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.media.view">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.media.save">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.media.edit">
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Strony</td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.pages.view">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.pages.save">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.pages.edit">
+        </td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Blog</td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.blog.view">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.blog.save">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.blog.edit">
+        </td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Menu</td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.menu.view">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.menu.save">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.menu.edit">
+        </td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Ustawienia</td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.settings.view">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.settings.save">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.settings.edit">
+        </td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Użytkownicy</td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.person.view">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.person.save">
+        </td>
+        <td>
+          <input type="checkbox" class="form-check-input" v-model="person.permission.person.edit">
+        </td>
+      </tr>
+    </tbody>
+    <tbody>
+
+    </tbody>
+
+  </table>
         </div>
       </div>
     </div>
@@ -74,7 +187,38 @@ export default {
         alias: "",
         email: "",
         password: "",
-        permission: ""
+        permission: {
+          media: {
+            view: false,
+            save: false,
+            edit: false
+          },
+          pages: {
+            view: false,
+            save: false,
+            edit: false
+          },
+          blog: {
+            view: false,
+            save: false,
+            edit: false
+          },
+          menu: {
+            view: false,
+            save: false,
+            edit: false
+          },
+          settings: {
+            view: false,
+            save: false,
+            edit: false
+          },
+          person: {
+            view: false,
+            save: false,
+            edit: false
+          }
+        }
       }
     }
   },
@@ -94,7 +238,7 @@ export default {
         .catch(error => {
           vm.$swal('Ups... coś poszło nie tak',
             `Błąd: ${error}`,
-            'warning'
+            'warniv'
           )
         })
     }

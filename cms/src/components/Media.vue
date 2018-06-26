@@ -62,62 +62,7 @@
   </div>
 </div>
 </template>
-<style media="screen">
-.loader {
-  border: 5px solid #eee;
-  border-top: 5px solid #3498db;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  animation: spin 2s linear infinite;
-}
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.container {
-  margin-top: 20px;
-}
-
-.image-preview-input {
-  position: relative;
-  overflow: hidden;
-  margin: 0px;
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
-}
-
-.image-preview-input input[type=file] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0;
-  padding: 0;
-  font-size: 20px;
-  cursor: pointer;
-  opacity: 0;
-  filter: alpha(opacity=0);
-}
-
-.image-preview-input-title {
-  margin-left: 2px;
-}
-
-.v--modal-overlay {
-  z-index: 9999;
-}
-</style>
 <script>
 import media from '../http/media'
 

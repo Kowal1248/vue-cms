@@ -38,10 +38,11 @@ export default {
   },
 
   loggedIn() {
-
+    if(localStorage.token){
     axios.defaults.headers.common['X-Auth'] = localStorage.token;
-
-    return !!localStorage.token
+    return true;
+  } else
+    return false
   },
 
   onChange() {}

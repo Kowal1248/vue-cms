@@ -57,7 +57,7 @@
   },
   "button": {
     "send": "Wyślij",
-    "closeList:": "Zwiń listę",
+    "closeList": "Zwiń listę",
     "expandList": "Rozwiń listę",
     "deleteElement": "Tak, usuń to!",
     "closeButton": "Zamknij"

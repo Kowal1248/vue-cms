@@ -24,6 +24,7 @@
         </li>
         <li>
           <router-link to="/blog"> <a><span class="ti-layers menu-icon" style="color: #673ab7"></span>Blog</a></router-link>
+          
         </li>
         <li>
           <router-link to="/menu"> <a><span class="ti-list menu-icon" style="color:#e91e63"></span>Menu</a></router-link>
@@ -47,8 +48,10 @@
       <vue-progress-bar></vue-progress-bar>
 </template>
     <template v-else>
-<p>
-  Zalogowany {{ loggedIn ? 'in' : 'out' }}</p>
+      <div class="col-md-12" style="text-align:center;">
+        <img src="./assets/404.gif" style="margin-top:70px">
+
+      </div>
 </template>
 
   </div>

@@ -7,9 +7,7 @@ module.exports = function(req, res, next) {
     } catch (err) {
       req.auth = null
     }
-
-
-    //console.log("Auth:", req.auth.user_id)
   }
   next()
+
 }
