@@ -1,21 +1,21 @@
 <template>
 <div id="page-content-wrapper">
   <div class="container-fluid">
-    <h3>Strony</h3>
+    <h3>{{lang.title}}</h3>
 
 
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <router-link to="/"><a>Strony</a></router-link>
+          <router-link to="/"><a>{{lang.title}}</a></router-link>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Podgląd wszystkich</li>
+        <li class="breadcrumb-item active" aria-current="page">{{langBreadcrumb.viewAll}}</li>
       </ol>
     </nav>
 
 
     <div class="box">
-      <h6 class="box-title">Strony
+      <h6 class="box-title">{{lang.listPages}}
 
         <router-link to="/pages/add"><a><span class="ti-plus" style="float:right"></span></a></router-link>
     </h6>
@@ -25,11 +25,11 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>Nr</th>
-                <th>Autor</th>
-                <th>Nazwa</th>
-                <th>Data publikacji</th>
-                <th>Operacje</th>
+                <th>{{lang.table.number}}</th>
+                <th>{{lang.table.author}}</th>
+                <th>{{lang.table.name}}</th>
+                <th>{{lang.table.data}}</th>
+                <th>{{lang.table.operations}}</th>
               </tr>
             </thead>
             <tbody>
@@ -45,8 +45,8 @@
               </tr>
             </tbody>
           </table>
-          <button @click="limitNumber += 3" class="btn btn-primary" style="width:100%" v-if="pages.length > limitNumber">Pokaż więcej</button>
-          <button @click="limitNumber -= 3" class="btn btn-primary" style="width:100%" v-if="pages.length <= limitNumber && pages.length != 0">Zwiń liste</button>
+          <button @click="limitNumber += 3" class="btn btn-primary" style="width:100%" v-if="pages.length > limitNumber">{{langButton.expandList}}</button>
+          <button @click="limitNumber -= 3" class="btn btn-primary" style="width:100%" v-if="pages.length <= limitNumber && pages.length != 0">{{langButton.closeList}}</button>
 
         </div>
       </div>
@@ -68,7 +68,11 @@ export default {
   data() {
     return {
       pages: [],
-      limitNumber: 3
+      limitNumber: 3,
+      lang: this.$root.$options.language.pages,
+      langAlert: this.$root.$options.language.alert,
+      langButton: this.$root.$options.language.button,
+      langBreadcrumb: this.$root.$options.language.breadcrumb
     }
   },
   methods: {
@@ -80,8 +84,8 @@ export default {
 
         })
         .catch(error => {
-          vm.$swal('Ups... coś poszło nie tak',
-            `Błąd: ${error}`,
+          vm.$swal(vm.langAlert.titleCatch,
+            vm.langAlert.textError + `${error}`,
             'warning'
           )
         })
@@ -89,32 +93,31 @@ export default {
     trash: function(id) {
       var vm = this
       this.$swal({
-        title: 'Jesteś pewny?',
-        text: "Po usunięciu niema opcji przywrócenia!",
+        title: vm.langAlert.titleAreYoSure,
+        text: vm.langAlert.textDelete,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Tak, usuń to!',
-        cancelButtonText: 'Zostaw'
+        confirmButtonText: vm.langButton.deleteElement,
+        cancelButtonText: vm.langButton.closeButton
       }).then((result) => {
         if (result.value) {
           pages.delete(id)
             .then(function() {
               vm.get()
               vm.$swal(
-                'Usunięto!',
-                'Element został poprawnie usunięty z bazy',
+                vm.langAlert.titleDelete,
+                vm.langAlert.textCompleteDelete,
                 'success'
               )
             })
             .catch(error => {
-              vm.$swal('Ups... coś poszło nie tak',
-                `Błąd: ${error}`,
+              vm.$swal(vm.langAlert.titleCatch,
+                vm.langAlert.textError + `${error}`,
                 'warning'
               )
             })
-
         }
       })
     }

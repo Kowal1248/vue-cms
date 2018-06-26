@@ -1,0 +1,68 @@
+{
+  "dashboard": {
+    "title": "Kokpit",
+    "numberOfPage": "Ilość stron",
+    "numberAttachment": "Ilość załączników",
+    "numberUsers": "Ilość użytkowników",
+    "numberInput": "Ilość wejść",
+    "inputStatistic": "Statystyka wejść",
+    "listLogin": "Lista logowań",
+    "table": {
+      "number": "nr",
+      "email": "e-mail",
+      "ip": "ip",
+      "data": "data"
+    }
+  },
+  "media": {
+    "title": "Media",
+    "addFile": "Dodaj nowy plik",
+    "files": "Pliki",
+    "noFile": "Brak plików"
+
+  },
+  "pages": {
+    "title": "Strony",
+    "listPages": "Strony",
+    "table": {
+      "number": "nr",
+      "author": "Autor",
+      "name": "Nazwa",
+      "data": "Data publikacji",
+      "operations": "Operacje"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "listBlogs": "Blog",
+    "table": {
+      "number": "nr",
+      "author": "Autor",
+      "name": "Nazwa",
+      "category": "Kategoria",
+      "status": "Status",
+      "data": "Data publikacji",
+      "operations": "Operacje"
+    }
+  },
+  "alert": {
+    "titleAreYoSure": "Jesteś pewny ?",
+    "titleSave": "Zapisałem",
+    "titleCatch": "Ups... coś poszło nie tak",
+    "titleDelete": "Usunięto",
+    "titleAddCategory": "Podaj nazwę nowej kategorii",
+    "textDelete": "Po usunięciu niema opcji przywrócenia!",
+    "textCompleteDelete": "Element został poprawnie usunięty z bazy",
+    "textError": "Błąd: "
+  },
+  "button": {
+    "send": "Wyślij",
+    "closeList:": "Zwiń listę",
+    "expandList": "Rozwiń listę",
+    "deleteElement": "Tak, usuń to!",
+    "closeButton": "Zamknij"
+  },
+  "breadcrumb": {
+    "viewAll": "Podgląd wszystkich"
+  }
+}

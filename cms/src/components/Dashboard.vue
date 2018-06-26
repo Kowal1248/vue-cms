@@ -2,7 +2,7 @@
 <div id="page-content-wrapper">
 
   <div class="container-fluid">
-    <h3>Kokpit</h3>
+    <h3>{{lang.title}}</h3>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -19,7 +19,7 @@
         <div class="col-md-3" style="float:left;">
           <div class="box">
             <h6 class="box-title">
-              Ilość stron
+              {{lang.numberOfPage}}
             </h6>
             <hr>
 
@@ -30,7 +30,7 @@
         <div class="col-md-3" style="float:left;">
           <div class="box">
             <h6 class="box-title">
-              Ilość załączników
+              {{lang.numberAttachment}}
             </h6>
             <hr>
             <h3> <span class="ti-bar-chart-alt" style="padding-right:20px;color: rgb(255, 87, 34)"></span>2455</h3>
@@ -41,7 +41,7 @@
         <div class="col-md-3" style="float:left;">
           <div class="box">
             <h6 class="box-title">
-              Ilość użytkowników
+              {{lang.numberUsers}}
             </h6>
             <hr>
             <h3> <span class="ti-bar-chart-alt" style="padding-right:20px;color: rgb(103, 58, 183);"></span>2455</h3>
@@ -50,7 +50,7 @@
         <div class="col-md-3" style="float:left;">
           <div class="box">
             <h6 class="box-title">
-              Ilość wejść
+              {{lang.numberInput}}
             </h6>
             <hr>
             <h3> <span class="ti-bar-chart-alt" style="padding-right:20px;color: rgb(233, 30, 99);"></span>2455</h3>
@@ -69,7 +69,7 @@
       <draggable>
         <div class="col-md-7" style="float:left;">
           <div class="box">
-            <h6 class="box-title">Statystyka wejść</h6>
+            <h6 class="box-title">{{lang.inputStatistic}}</h6>
             <hr>
             <canvas id="planet-chart"></canvas>
 
@@ -77,14 +77,14 @@
         </div>
         <div class="col-md-5" style="float:left;">
           <div class="box">
-            <h6 class="box-title">Lista logowań</h6>
+            <h6 class="box-title">{{lang.listLogin}}</h6>
             <table class="table">
               <thead>
 
-                  <th>Nr:</th>
-                  <th>e-mail</th>
-                  <th>IP</th>
-                  <th>Data</th>
+                  <th>{{lang.table.number}}</th>
+                  <th>{{lang.table.email}}</th>
+                  <th>{{lang.table.ip}}</th>
+                  <th>{{lang.table.data}}</th>
 
               </thead>
               <tbody>
@@ -153,11 +153,12 @@ import Chart from 'chart.js';
 export default {
 
   components: {
-    draggable,
+    draggable
   },
   data() {
     return {
-      planetChartData: planetChartData
+      planetChartData: planetChartData,
+      lang: this.$root.$options.language.dashboard
     }
   },
   methods: {
@@ -171,6 +172,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.lang);
     this.createChart('planet-chart', this.planetChartData);
   }
 }

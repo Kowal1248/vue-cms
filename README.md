@@ -28,7 +28,7 @@ Distribution version:
 
 Run server:
   1. Go to `cd ./cms-server`
-  2. Run by `nodemon`
+  2. Run by `node server.js`
 
 ## Usage
 Not currently available :)

@@ -7,12 +7,11 @@ import VModal from 'vue-js-modal'
 import VueClipboard from 'vue-clipboard2'
 import VueClazyLoad from 'vue-clazy-load'
 import VueDraggable from 'vuedraggable'
-import config from './config.json'
 import fab from 'vue-fab'
 import moment from 'moment'
-
-
 Vue.config.productionTip = false
+
+
 const options = {
   color: '#3399ff',
   failedColor: '#874b4b',
@@ -26,6 +25,8 @@ const options = {
   location: 'top',
   inverse: false
 }
+
+
 Vue.filter('formatDate', function(value) {
   if (value) {
     return moment(String(value)).format('DD.MM.YYYY hh:mm')
@@ -136,8 +137,6 @@ const router = new VueRouter({
       component: Menu,
       beforeEnter: requireAuth
     },
-
-
     {
       path: '/logout',
       beforeEnter(to, from, next) {
@@ -148,11 +147,16 @@ const router = new VueRouter({
   ]
 })
 
-let settings = config;
+import config from './config.json'
+let settings = config
+
+let language = require("./language/" + settings.language + ".json");
+
 
   new Vue({
     el: '#app',
     router,
     settings,
+    language,
     render: h => h(App)
   })

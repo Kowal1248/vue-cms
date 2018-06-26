@@ -7,27 +7,27 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <router-link to="/media"><a>Media</a></router-link>
+          <router-link to="/media"><a>{{lang.title}}</a></router-link>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Podgląd wszystkich</li>
       </ol>
     </nav>
     <div class="box">
-      <h6 class="box-title">Dodaj nowy plik
+      <h6 class="box-title">{{lang.addFile}}
     </h6>
       <hr>
       <div class="large-12 medium-12 small-12 cell">
 
         <input type="file" id="file" ref="file" class="form-control" style="width:90%;float:left"  v-on:change="handleFileUpload()" />
 
-        <button v-on:click="submitFile()" class="btn btn-primary" style="margin-left:20px">Wyślij</button>
+        <button v-on:click="submitFile()" class="btn btn-primary" style="margin-left:20px">{{langButton.send}}</button>
       </div>
     </div>
 <div class="row">
 <div class="col-md-12">
 
     <div class="box" style="height:500px;overflow-y:auto">
-      <h6 class="box-title">Pliki
+      <h6 class="box-title">{{lang.files}}
     </h6>
       <hr>
       <div v-for="item in limitedItems" v-if="item.media != undefined" :key="item._id">
@@ -48,10 +48,10 @@
         </div>
       </div>
       <div v-if="files.length == 0">
-        <h3 style="text-align:center;padding-top:15%;">Brak plików</h3>
+        <h3 style="text-align:center;padding-top:15%;">{{lang.noFile}}</h3>
       </div>
-      <button @click="limitNumber += 3" class="btn btn-primary" style="width:100%" v-if="files.length > limitNumber">Pokaż więcej</button>
-      <button @click="limitNumber -= files.length -3" class="btn btn-primary" style="width:100%" v-if="files.length <= limitNumber && files.length != 0">Zwiń liste</button>
+      <button @click="limitNumber += 3" class="btn btn-primary" style="width:100%" v-if="files.length > limitNumber">{{langButton.expandList}}</button>
+      <button @click="limitNumber -= files.length -3" class="btn btn-primary" style="width:100%" v-if="files.length <= limitNumber && files.length != 0">{{langButton.closeList}}</button>
 
     </div>
         </div></div>
@@ -132,7 +132,9 @@ export default {
       files: [],
       url: this.$root.$options.settings.url + "/media/",
       data: "",
-      limitNumber: 3
+      limitNumber: 3,
+      lang: this.$root.$options.language.media,
+      langButton: this.$root.$options.language.button
     }
   },
   methods: {
