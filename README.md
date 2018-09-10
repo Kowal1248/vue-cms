@@ -1,4 +1,4 @@
-# Cms build by VueJS 2 / NodeJS / MongoDB
+# CMS FOR MULTIPLE WEBSITE build by VueJS 2 / NodeJS / MongoDB
 
 Under construction :)
 Currently, the system is not responsive
